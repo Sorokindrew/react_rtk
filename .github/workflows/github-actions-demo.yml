@@ -5,10 +5,14 @@ jobs:
     runs-on: ubuntu-latest    
     strategy:
       matrix:
-        node-version: [12.x]    
+        node-version: [18.x]    
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with: 
           node-version: ${{ matrix.node-version }}
+      - name: Prettier install
+        run: npm install prettier
+      - name: Format code
+        run: prettier
       
