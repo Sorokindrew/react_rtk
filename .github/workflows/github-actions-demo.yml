@@ -14,5 +14,5 @@ jobs:
       - name: ESLint install
         run: npm install eslint
       - name: Check code
-        run: eslint -c .eslintrc
+        run: npm eslint -c .eslintrc
       
