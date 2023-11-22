@@ -13,8 +13,7 @@ export const rapidApi = createApi({
                 url: 'recipes/list',
                 headers: {
                     'content-type': 'application/json',
-                    'X-RapidAPI-Key':
-                        '60b585d408mshe86f0d2e179bff6p12a1b0jsn2e376513e31d',
+                    'X-RapidAPI-Key': `${process.env.REACT_APP_API_KEY}`,
                     'X-RapidAPI-Host': 'tasty.p.rapidapi.com',
                 },
                 params: {
