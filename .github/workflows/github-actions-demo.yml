@@ -1,9 +1,14 @@
-name: ESLint
+name: ESlint
 on: [push]
 jobs:
-  ESLint:
-    runs-on: ubuntu-latest
+  linting:
+    runs-on: ubuntu-latest    
+    strategy:
+      matrix:
+        node-version: [12.x]    
     steps:
-      - run: cd src
-      - run: npm eslint
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with: 
+          node-version: ${{ matrix.node-version }}
       
