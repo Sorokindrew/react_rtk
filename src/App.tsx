@@ -1,9 +1,20 @@
 import React from 'react';
 
+import { Route, Routes } from 'react-router-dom';
+
+import { Header } from './components/Header';
+import { MainPage } from './pages/MainPage';
+import { Favourite } from './pages/Favourite';
+
+
 function App() {
   return (
-    <div className="bg-red-300">
-      <h1 className="font-bold">My test project</h1>
+    <div className="max-w-screen-xl mx-auto">
+      <Header />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/favourites" element={<Favourite />} />
+      </Routes>
     </div>
   );
 }
