@@ -11,8 +11,8 @@ jobs:
       - uses: actions/setup-node@v1
         with: 
           node-version: ${{ matrix.node-version }}
-      - name: Prettier install
-        run: npm install prettier
-      - name: Format code
-        run: npm prettier
+      - name: ESLint install
+        run: npm install eslint
+      - name: Check code
+        run: npm lint
       
