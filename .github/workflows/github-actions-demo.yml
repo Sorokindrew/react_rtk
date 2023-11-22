@@ -1,0 +1,18 @@
+name: ESlint
+on: [pull_request]
+jobs:
+  linting:
+    runs-on: ubuntu-latest    
+    strategy:
+      matrix:
+        node-version: [18.x]    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with: 
+          node-version: ${{ matrix.node-version }}
+      - name: ESLint install
+        run: npm install eslint
+      - name: Check code
+        run: npm run lint
+      

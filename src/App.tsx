@@ -1,6 +1,7 @@
 import React from 'react';
 
 function App() {
+  console.log('Check if ESlint works');
   return (
     <div className="bg-red-300">
       <h1 className="font-bold">My test project</h1>
