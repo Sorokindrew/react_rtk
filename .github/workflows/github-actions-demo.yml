@@ -4,5 +4,6 @@ jobs:
   ESLint:
     runs-on: ubuntu-latest
     steps:
+      - run: cd src
       - run: npm eslint
       
