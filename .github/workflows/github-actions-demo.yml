@@ -14,5 +14,5 @@ jobs:
       - name: Prettier install
         run: npm install prettier
       - name: Format code
-        run: prettier
+        run: npm prettier
       
