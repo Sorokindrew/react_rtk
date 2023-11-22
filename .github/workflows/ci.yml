@@ -2,17 +2,16 @@ name: ESlint
 on: [pull_request]
 jobs:
   linting:
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x]    
+        node-version: [18.x]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-        with: 
+        with:
           node-version: ${{ matrix.node-version }}
-      - name: ESLint install
-        run: npm install eslint
-      - name: Check code
-        run: npm run lint
-      
+      - name: Prettier install
+        run: npm install prettier
+      - name: Format code
+        run: npm run prettier
