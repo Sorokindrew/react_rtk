@@ -8,3 +8,8 @@ export interface Dish {
 export interface ApiResponse {
     results: Dish[];
 }
+
+export interface FormProps {
+    isRegistered: boolean;
+    closeModal: () => void;
+}
