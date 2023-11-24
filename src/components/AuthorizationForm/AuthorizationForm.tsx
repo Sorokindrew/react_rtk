@@ -21,10 +21,10 @@ export function AuthorizationForm({ isRegistered, closeModal }: FormProps) {
         if (!isRegistered) {
             dispatch(addUser(values));
         }
-        closeModal();
-        if (users[values.login] === values.password) {
+        else if (users[values.login] === values.password && isRegistered) {
             onChange(values.login);
         };
+        closeModal();
 
     };
 
