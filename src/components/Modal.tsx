@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 export function Modal({ children }: { children: React.ReactNode }) {

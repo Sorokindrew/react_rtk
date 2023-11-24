@@ -1,43 +1,31 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Formik, Field, Form } from 'formik';
 
-import { FormProps } from '../models/models';
+import { FormProps, UsersState } from '../../models/models';
+import { addUser } from '../../store/usersSlice';
+import { RootState } from '../../store/store';
+import { userContext } from '../../context/userContext';
+import { loginValidator, passwordValidator } from '../../utils/formikValidators';
 
 import styles from './AuthorizationForm.module.css';
 
-
-
 export function AuthorizationForm({ isRegistered, closeModal }: FormProps) {
 
-
-    const loginValidator = (value: string) => {
-        if (!value.trim()) {
-            return 'Required';
-        }
-        else if (value.trim().length < 3) {
-            return 'Length of login should be more than 3 symbols';
-        }
-        else if (value.startsWith(' ')) {
-            return 'Login cannot starts with space.';
-        }
-    };
-
-    const passwordValidator = (value: string) => {
-        if (!value.trim()) {
-            return 'Required';
-        }
-        else if (value.length < 6) {
-            return 'Password length should be longer than 6 symbols';
-        }
-        else if (value.startsWith(' ')) {
-            return 'Password cannot starts with space.';
-        }
-    };
+    const dispatch = useDispatch();
+    const { users } = useSelector<RootState, UsersState>(state => state.users);
+    const { onChange } = useContext(userContext);
 
     const handleSubmit = (values: { login: string, password: string }) => {
-        console.log(values);
+        if (!isRegistered) {
+            dispatch(addUser(values));
+        }
         closeModal();
+        if (users[values.login] === values.password) {
+            onChange(values.login);
+        };
+
     };
 
     return (
@@ -45,6 +33,7 @@ export function AuthorizationForm({ isRegistered, closeModal }: FormProps) {
             {({ errors, touched }) => {
                 return (
                     <Form className={styles.form}>
+
                         <label className="text-black flex flex-col text-lg mb-5 pt-3">
                             <span className="font-bold mb-1">Login</span>
                             <Field name="login" validate={loginValidator} />
@@ -69,11 +58,9 @@ export function AuthorizationForm({ isRegistered, closeModal }: FormProps) {
                             <span className="h-10 w-1 bg-black rotate-45 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                             <span className="h-10 w-1 bg-black -rotate-45 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                         </button>
-
                     </Form>
                 );
             }}
-
         </Formik>
     );
 }
