@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { FormikData, UsersState } from '../models/models';
+import { saveToLS, getFromLS } from '../utils/localStoreData';
 
 const initialState: UsersState = {
-    users: JSON.parse(localStorage.getItem('users') || '[]'),
+    users: getFromLS('users'),
 };
 
 const usersSlice = createSlice({
@@ -12,7 +13,7 @@ const usersSlice = createSlice({
     reducers: {
         addUser(state, action: PayloadAction<FormikData>) {
             state.users[action.payload.login] = action.payload.password;
-            localStorage.setItem('users', JSON.stringify(state.users));
+            saveToLS('users', JSON.stringify(state.users));
         },
     },
 });

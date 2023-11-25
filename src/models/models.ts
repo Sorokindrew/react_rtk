@@ -30,3 +30,16 @@ export interface AuthorizationProps {
     loggedUser: boolean;
     onLogout: (value: string) => void;
 }
+
+export interface UsersFavouritesState {
+    [key: string]: Dish[];
+}
+
+export interface UsersHistoryState {
+    [key: string]: string[];
+}
+
+export interface Favourite {
+    user: string;
+    dish: Dish;
+}
