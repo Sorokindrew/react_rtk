@@ -7,13 +7,13 @@ import { Dish } from '../models/models';
 import { useIsInFavourite } from '../hooks/useIsInFavourite';
 
 export function FavButton({ name, id, description, thumbnail_url }: Dish) {
-    const [initial] = useIsInFavourite(id);
-    const [isFavourite, setIsFavourite] = useState(initial);
+    const [isFavourite] = useIsInFavourite(id);
+    // const [isFavourite, setIsFavourite] = useState(initial);
     const dispatch = useDispatch();
     const { value } = useContext(userContext);
 
     const clickHandler = () => {
-        setIsFavourite(prev => !prev);
+        // setIsFavourite(prev => !prev);
         if (!isFavourite) {
             dispatch(addToFavourite({ user: value, dish: { name, id, description, thumbnail_url } }));
         }

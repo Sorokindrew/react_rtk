@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Dish } from '../models/models';
 import { userContext } from '../context/userContext';
@@ -10,10 +11,8 @@ export function DishCard({ name, id, description, thumbnail_url }: Dish) {
 
     return (
         <div className="relative pb-10">
-            <a
-                target="_blank"
-                href="#"
-                key={id}
+            <Link
+                to={`/dish/${id}`}
                 className="cursor-pointer"
             >
                 <img
@@ -23,7 +22,7 @@ export function DishCard({ name, id, description, thumbnail_url }: Dish) {
                 />
                 <p className="font-bold text-xl px-1 py-1 text-center">{`${name}`}</p>
                 <p className="px-1 py-1">{`${description}`}</p>
-            </a>
+            </Link>
             {value && <FavButton name={name} id={id} thumbnail_url={thumbnail_url} description={description} />}
         </div>
     );

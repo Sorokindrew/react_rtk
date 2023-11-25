@@ -5,6 +5,17 @@ export interface Dish {
     description: string;
 }
 
+export interface Instruction {
+    display_text: string;
+}
+
+export interface DishDetailed {
+    name: string;
+    thumbnail_url: string;
+    description: string;
+    instructions: Instruction[];
+}
+
 export interface ApiResponse {
     results: Dish[];
 }
