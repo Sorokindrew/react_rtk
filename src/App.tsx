@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-
 import { Route, Routes } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { Header } from './components/Header';
 import { Favourite } from './pages/Favourite';
@@ -21,14 +21,15 @@ function App() {
       <div className="max-w-screen-xl mx-auto">
         <Header />
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/"
+            element={<ErrorBoundary fallback={<div>Something went wrong...</div>}><MainPage /></ErrorBoundary>} />
           <Route path="/dish/:id" element={<DishPage />} />
           <Route path="/search" element={<Search />} />
           <Route path="/history" element={<History />} />
           <Route path="/favourites" element={<Favourite />} />
         </Routes>
-      </div>
-    </ContextProvider>
+      </div >
+    </ContextProvider >
   );
 }
 
