@@ -42,7 +42,7 @@ export function Search() {
                     onChange={event => setSearch(event.target.value)} />
                 {dropdown && <ul className="absolute top-[50px] left-10 h-[200px] overflow-y-scroll">
                     {isLoading && (
-                        <div>Loading...</div>
+                        <div className="w-[760px]">Loading...</div>
                     )}
                     {data?.map(el => (
                         <li key={el.id}

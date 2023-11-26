@@ -3,5 +3,5 @@ export function saveToLS(tag: string, data: string) {
 }
 
 export function getFromLS(tag: string) {
-    return JSON.parse(localStorage.getItem(tag) || '[]');
+    return JSON.parse(localStorage.getItem(tag) || '{}');
 }
