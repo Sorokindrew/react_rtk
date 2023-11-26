@@ -9,7 +9,7 @@ export const rapidApi = createApi({
     }),
     endpoints: build => ({
         searchDish: build.query<Dish[], string>({
-            query: () => ({
+            query: (search: string) => ({
                 url: 'recipes/list',
                 headers: {
                     'content-type': 'application/json',
@@ -18,6 +18,7 @@ export const rapidApi = createApi({
                 },
                 params: {
                     size: '20',
+                    q: search,
                 },
             }),
             transformResponse: (response: ApiResponse) => response.results,

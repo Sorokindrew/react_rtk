@@ -1,4 +1,4 @@
-name: ESlint
+name: Prettier
 on: [pull_request]
 jobs:
   linting:

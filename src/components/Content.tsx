@@ -16,7 +16,11 @@ export function Content({ data }: ContentProps) {
 
             {data?.map(item => {
                 return (
-                    <DishCard key={item.id} id={item.id} name={item.name} description={item.description} thumbnail_url={item.thumbnail_url} />
+                    <DishCard key={item.id}
+                        id={item.id}
+                        name={item.name}
+                        description={item.description}
+                        thumbnail_url={item.thumbnail_url} />
                 );
             })}
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { addToFavourite, removeFromFavourite } from '../store/favouritesSlice';
@@ -8,12 +8,11 @@ import { useIsInFavourite } from '../hooks/useIsInFavourite';
 
 export function FavButton({ name, id, description, thumbnail_url }: Dish) {
     const [isFavourite] = useIsInFavourite(id);
-    // const [isFavourite, setIsFavourite] = useState(initial);
     const dispatch = useDispatch();
     const { value } = useContext(userContext);
+    const cssButton = 'border px-2 py-2 rounded absolute right-0 bottom-0';
 
     const clickHandler = () => {
-        // setIsFavourite(prev => !prev);
         if (!isFavourite) {
             dispatch(addToFavourite({ user: value, dish: { name, id, description, thumbnail_url } }));
         }
@@ -22,13 +21,16 @@ export function FavButton({ name, id, description, thumbnail_url }: Dish) {
         }
     };
     let text = 'Add';
-    let color = 'green';
+    let color = 'bg-green-500';
     if (isFavourite) {
         text = 'Remove';
-        color = 'red';
+        color = 'bg-red-500';
     }
 
     return (
-        <button className={`border px-2 py-2 rounded absolute right-0 bottom-0 bg-${color}-600`} onClick={clickHandler}>{text}</button>
+        <button className={cssButton + ' ' + color}
+            onClick={clickHandler}>
+            {text}
+        </button>
     );
 }

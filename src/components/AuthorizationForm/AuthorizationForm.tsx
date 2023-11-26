@@ -16,6 +16,7 @@ export function AuthorizationForm({ isRegistered, closeModal }: FormProps) {
     const dispatch = useDispatch();
     const { users } = useSelector<RootState, UsersState>(state => state.users);
     const { onChange } = useContext(userContext);
+    const baseCssCross = 'h-10 w-1 bg-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2';
 
     const handleSubmit = (values: { login: string, password: string }) => {
         if (!isRegistered) {
@@ -54,9 +55,10 @@ export function AuthorizationForm({ isRegistered, closeModal }: FormProps) {
                             {isRegistered ? 'Sign in' : 'Sign up'}
                         </button>
 
-                        <button className="absolute h-10 w-10 top-[10px] right-[10px] cursor-pointer" onClick={closeModal}>
-                            <span className="h-10 w-1 bg-black rotate-45 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-                            <span className="h-10 w-1 bg-black -rotate-45 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                        <button className="absolute h-10 w-10 top-[10px] right-[10px] cursor-pointer"
+                            onClick={closeModal}>
+                            <span className={baseCssCross + ' rotate-45'} />
+                            <span className={baseCssCross + ' -rotate-45'} />
                         </button>
                     </Form>
                 );
