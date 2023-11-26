@@ -58,3 +58,10 @@ export interface Favourite {
 export interface UserHistoryState {
     history: Dish[];
 }
+
+export interface Log {
+    [key: string]: {
+        request: string;
+        payload: Object;
+    };
+}

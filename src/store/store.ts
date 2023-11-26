@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import { logger } from '../utils/logger';
+
 import { rapidApi } from './api/api';
 import { usersReducer } from './usersSlice';
 import { usersFavouritesReducer } from './favouritesSlice';
@@ -13,7 +15,7 @@ export const store = configureStore({
         userHistory: userHistoryReducer,
     },
     middleware: getDefaultMiddleware =>
-        getDefaultMiddleware().concat(rapidApi.middleware),
+        getDefaultMiddleware().concat([rapidApi.middleware, logger]),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
