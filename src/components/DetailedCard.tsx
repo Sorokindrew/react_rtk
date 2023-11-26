@@ -14,7 +14,7 @@ export function DetailedCard({ data }: DetailedCardProps) {
             <div className="mb-5 text-xl italic">{data.description}</div>
             <ul className="list-decimal">
                 {data.instructions.map(el => {
-                    return (<li>{el.display_text}</li>);
+                    return (<li key={el.display_text}>{el.display_text}</li>);
                 })
                 }
             </ul>

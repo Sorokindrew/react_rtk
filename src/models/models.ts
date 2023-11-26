@@ -54,3 +54,7 @@ export interface Favourite {
     user: string;
     dish: Dish;
 }
+
+export interface UserHistoryState {
+    history: Dish[];
+}
