@@ -8,6 +8,7 @@ import { History } from './pages/History';
 import { userContext } from './context/userContext';
 import { Search } from './pages/Search';
 import { MainPage } from './pages/MainPage';
+import { DishPage } from './pages/DishPage';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/dish/:id" element={<DishPage />} />
           <Route path="/search" element={<Search />} />
           <Route path="/history" element={<History />} />
           <Route path="/favourites" element={<Favourite />} />
