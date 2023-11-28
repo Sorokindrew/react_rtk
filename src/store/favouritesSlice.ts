@@ -1,8 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { Favourite, UsersFavouritesState } from '../models/models';
+import { getFromLS, saveToLS } from '../utils/localStoreData';
 
-const initialState: UsersFavouritesState = {};
+const initialState: UsersFavouritesState = getFromLS('favourites');
 
 const usersFavouritesSlice = createSlice({
     name: 'favourites',
@@ -13,11 +14,13 @@ const usersFavouritesSlice = createSlice({
                 state[action.payload.user] = [];
             }
             state[action.payload.user].push(action.payload.dish);
+            saveToLS('favourites', JSON.stringify(state));
         },
         removeFromFavourite(state, action: PayloadAction<Favourite>) {
             state[action.payload.user] = state[action.payload.user].filter(
                 el => el.id !== action.payload.dish.id
             );
+            saveToLS('favourites', JSON.stringify(state));
         },
     },
 });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -7,11 +7,13 @@ import { useSearchDishQuery } from '../store/api/api';
 import { addToHistory } from '../store/historySlice';
 import { Dish } from '../models/models';
 import { useLoggedUser } from '../hooks/useLoggedUser';
+import { userContext } from '../context/userContext';
 
 export function Search() {
     const [search, setSearch] = useState('');
     const [dropdown, setDropdown] = useState(false);
     const debouncedSearch = useDebounce(search);
+    const { value } = useContext(userContext);
     const nav = useNavigate();
     const dispatch = useDispatch();
     const [loggedUser] = useLoggedUser();
@@ -19,7 +21,7 @@ export function Search() {
     const clickHandler = (item: Dish) => {
         nav(`/dish/${item.id}`);
         if (loggedUser) {
-            dispatch(addToHistory(item));
+            dispatch(addToHistory({ user: value, dish: item }));
         }
 
     };
@@ -40,7 +42,7 @@ export function Search() {
                     placeholder="Type here what you want to search..."
                     value={search}
                     onChange={event => setSearch(event.target.value)} />
-                {dropdown && <ul className="absolute top-[50px] left-10 h-[200px] overflow-y-scroll">
+                {dropdown && <ul className="absolute top-[50px] left-10 max-h-[200px] overflow-y-scroll">
                     {isLoading && (
                         <div className="w-[760px]">Loading...</div>
                     )}

@@ -9,7 +9,7 @@ export function History() {
 
     return (
         <ul className="px-5 list-decimal">
-            {history.map(el => (
+            {history && history.map(el => (
                 <li key={el.id} className="text-2xl mb-1 cursor-pointer hover:text-blue-600">
                     <Link to={`/dish/${el.id}`}>{el.name}</Link>
                 </li>
