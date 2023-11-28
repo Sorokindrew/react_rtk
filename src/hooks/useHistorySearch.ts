@@ -6,10 +6,10 @@ import { Dish } from '../models/models';
 import { userContext } from '../context/userContext';
 
 export function useHistorySearch() {
-    const { value } = useContext(userContext);
+    const { user } = useContext(userContext);
 
     const history = useSelector<RootState, Dish[]>(
-        state => state.userHistory[value]
+        state => state.userHistory[user]
     );
 
     return history === undefined ? [] : history;

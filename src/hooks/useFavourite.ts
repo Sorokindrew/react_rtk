@@ -6,14 +6,12 @@ import { Dish } from '../models/models';
 import { RootState } from '../store/store';
 
 export function useFavourite() {
-    const { value } = useContext(userContext);
-    const favourites = useSelector<RootState, Dish[]>(
-        state => {
-            if(!state.usersFavourites[value]) {
-                return [];
-            }
-            return state.usersFavourites[value];
+    const { user } = useContext(userContext);
+    const favourites = useSelector<RootState, Dish[]>(state => {
+        if (!state.usersFavourites[user]) {
+            return [];
         }
-    );
+        return state.usersFavourites[user];
+    });
     return favourites;
 }

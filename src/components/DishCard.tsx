@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { Dish } from '../models/models';
 import { userContext } from '../context/userContext';
 
-import { FavButton } from './FavButton';
+import { FavButtonContainer } from './FavButtonContainer';
 
 export function DishCard({ name, id, description, thumbnail_url }: Dish) {
-    const { value } = useContext(userContext);
+    const { user } = useContext(userContext);
 
     return (
         <div className="relative pb-10">
@@ -23,7 +23,11 @@ export function DishCard({ name, id, description, thumbnail_url }: Dish) {
                 <p className="font-bold text-xl px-1 py-1 text-center">{`${name}`}</p>
                 <p className="px-1 py-1">{`${description}`}</p>
             </Link>
-            {value && <FavButton name={name} id={id} thumbnail_url={thumbnail_url} description={description} />}
+            {user && <FavButtonContainer
+                name={name}
+                id={id}
+                thumbnail_url={thumbnail_url}
+                description={description} />}
         </div>
     );
 }
