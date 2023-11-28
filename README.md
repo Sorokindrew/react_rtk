@@ -8,7 +8,8 @@
 
 ## Стек технологий
 
-Данный проект реализован с использованием [React](https://react.dev/), [Redux Toolkit](https://redux-toolkit.js.org/), [RTK Query](https://redux-toolkit.js.org/rtk-query/overview). Для типизации использован [TypeScript](https://www.typescriptlang.org/).  
+Данный проект реализован с использованием [React](https://react.dev/), [Redux Toolkit](https://redux-toolkit.js.org/), [RTK Query](https://redux-toolkit.js.org/rtk-query/overview).  
+Для типизации использован [TypeScript](https://www.typescriptlang.org/).  
 Для стилизации использован [Tailwind](https://tailwindcss.com/docs/guides/create-react-app).  
 В качестве API использовано [RapidApi](https://rapidapi.com/apidojo/api/tasty).  
 Для валидации формы регистрации и аутентификации использована библиотека [Formik](https://formik.org/).
