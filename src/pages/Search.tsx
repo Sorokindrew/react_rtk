@@ -9,7 +9,7 @@ import { Dish } from '../models/models';
 import { useLoggedUser } from '../hooks/useLoggedUser';
 import { userContext } from '../context/userContext';
 
-export function Search() {
+function Search() {
     const [search, setSearch] = useState('');
     const [dropdown, setDropdown] = useState(false);
     const debouncedSearch = useDebounce(search);
@@ -61,3 +61,5 @@ export function Search() {
         </main>
     );
 }
+
+export default Search;
