@@ -1,11 +1,11 @@
 import React from 'react';
 
 interface UserContext {
-    value: string;
+    user: string;
     onChange: (value: string) => void;
 }
 
 export const userContext = React.createContext<UserContext>({
-    value: '',
+    user: '',
     onChange: () => {},
 });

@@ -18,7 +18,7 @@ function App() {
   const Search = lazy(() => import('./pages/Search'));
 
   return (
-    <ContextProvider value={{ value: user, onChange: setUser }}>
+    <ContextProvider value={{ user: user, onChange: setUser }}>
       <div className="max-w-screen-xl mx-auto">
         <Header />
         <Routes>

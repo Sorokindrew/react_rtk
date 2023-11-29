@@ -13,7 +13,7 @@ function Search() {
     const [search, setSearch] = useState('');
     const [dropdown, setDropdown] = useState(false);
     const debouncedSearch = useDebounce(search);
-    const { value } = useContext(userContext);
+    const { user } = useContext(userContext);
     const nav = useNavigate();
     const dispatch = useDispatch();
     const [loggedUser] = useLoggedUser();
@@ -21,7 +21,7 @@ function Search() {
     const clickHandler = (item: Dish) => {
         nav(`/dish/${item.id}`);
         if (loggedUser) {
-            dispatch(addToHistory({ user: value, dish: item }));
+            dispatch(addToHistory({ user: user, dish: item }));
         }
 
     };
