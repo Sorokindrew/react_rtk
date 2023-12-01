@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from 'react';
+import React, { lazy, Suspense, useMemo, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -8,17 +8,21 @@ import { History } from './pages/History';
 import { userContext } from './context/userContext';
 import { MainPage } from './pages/MainPage';
 import { DishPage } from './pages/DishPage';
+import { getFromLS } from './utils/localStoreData';
 
 
 function App() {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState(
+    typeof getFromLS('activeUser') === 'object' ? '' : getFromLS('activeUser')
+  );
+  const value = useMemo(() => ({ user: user, onChange: setUser }), [user]);
 
   const ContextProvider = userContext.Provider;
 
   const Search = lazy(() => import('./pages/Search'));
 
   return (
-    <ContextProvider value={{ user: user, onChange: setUser }}>
+    <ContextProvider value={value}>
       <div className="max-w-screen-xl mx-auto">
         <Header />
         <Routes>

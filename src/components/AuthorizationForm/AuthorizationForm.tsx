@@ -8,6 +8,7 @@ import { addUser } from '../../store/usersSlice';
 import { RootState } from '../../store/store';
 import { userContext } from '../../context/userContext';
 import { loginValidator, passwordValidator } from '../../utils/formikValidators';
+import { saveToLS } from '../../utils/localStoreData';
 
 import styles from './AuthorizationForm.module.css';
 
@@ -24,6 +25,7 @@ export function AuthorizationForm({ isRegistered, closeModal }: FormProps) {
         }
         else if (users[values.login] === values.password && isRegistered) {
             onChange(values.login);
+            saveToLS('activeUser', JSON.stringify(values.login));
         };
         closeModal();
 
