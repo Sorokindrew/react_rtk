@@ -1,12 +1,17 @@
 import React from 'react';
 
 import { DishDetailed } from '../models/models';
+import { useLoggedUser } from '../hooks/useLoggedUser';
+
+import { FavButtonContainer } from './FavButtonContainer';
 
 interface DetailedCardProps {
     data: DishDetailed
 }
 
 export function DetailedCard({ data }: DetailedCardProps) {
+    const [loggedUser] = useLoggedUser();
+
     return (
         <>
             <img src={data.thumbnail_url} alt={data.name} />
@@ -18,6 +23,14 @@ export function DetailedCard({ data }: DetailedCardProps) {
                 })
                 }
             </ul>
+            {loggedUser && <div className="relative h-[50px]">
+                <FavButtonContainer
+                    name={data.name}
+                    id={data.id}
+                    thumbnail_url={data.thumbnail_url}
+                    description={data.description}
+                />
+            </div>}
         </>
     );
 

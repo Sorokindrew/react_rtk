@@ -10,6 +10,7 @@ export interface Instruction {
 }
 
 export interface DishDetailed {
+    id: number;
     name: string;
     thumbnail_url: string;
     description: string;
