@@ -13,7 +13,7 @@ const userHistorySlice = createSlice({
             if (state[action.payload.user] === undefined) {
                 state[action.payload.user] = [];
             }
-            state[action.payload.user].push(action.payload.dish);
+            state[action.payload.user].push(action.payload.search);
             saveToLS('history', JSON.stringify(state));
         },
     },

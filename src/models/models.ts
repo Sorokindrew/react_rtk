@@ -57,12 +57,12 @@ export interface Favourite {
 }
 
 export interface UserHistoryState {
-    [key: string]: Dish[];
+    [key: string]: string[];
 }
 
 export interface SearchHistoryPayload {
     user: string;
-    dish: Dish;
+    search: string;
 }
 
 export interface Log {
