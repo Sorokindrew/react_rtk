@@ -8,7 +8,7 @@ import { addUser } from '../../store/usersSlice';
 import { RootState } from '../../store/store';
 import { userContext } from '../../context/userContext';
 import { loginValidator, passwordValidator } from '../../utils/formikValidators';
-import { saveToLS } from '../../utils/localStoreData';
+import { loginUser } from '../../utils/loginUser';
 
 import styles from './AuthorizationForm.module.css';
 
@@ -22,10 +22,10 @@ export function AuthorizationForm({ isRegistered, closeModal }: FormProps) {
     const handleSubmit = (values: { login: string, password: string }) => {
         if (!isRegistered) {
             dispatch(addUser(values));
+            loginUser(values.login, onChange);
         }
         else if (users[values.login] === values.password && isRegistered) {
-            onChange(values.login);
-            saveToLS('activeUser', JSON.stringify(values.login));
+            loginUser(values.login, onChange);
         };
         closeModal();
 
