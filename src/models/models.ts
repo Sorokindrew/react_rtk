@@ -26,7 +26,7 @@ export interface FormProps {
 }
 
 export interface UsersState {
-    users: { [key: string]: string };
+    [key: string]: string;
 }
 
 export interface FormikData {
