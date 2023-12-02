@@ -69,5 +69,4 @@ transformResponse: (response: ApiResponse) => response.results,
 ```
 
 -   [x] приложение написано на TypeScript
--   [x] [код, который обеспечивает сохранение данных в LS](https://github.com/Sorokindrew/react_rtk/blob/main/src/utils/changeLS.ts) написан так, чтобы в будущем, если захотим переехать на сохранение в Firebase, нам не придется вносить правки в клиентский код. Нужно будут только заменить saveSmthToLS на saveSmthToFB.
 -   [x] реализовано форматирование кода через _`Prettier`_ при pull_request (CI)

@@ -33,10 +33,10 @@ function Search() {
         skip: debouncedSearch.length < 3
     });
 
-    useEffect(() => {
-        setDropdown(debouncedSearch.length >= 3 && searchValue === '');
-
-    }, [debouncedSearch, data, searchValue]);
+    const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value);
+        setDropdown(true);
+    };
 
     const submitHandler = (e: React.FormEvent) => {
         e.preventDefault();
@@ -55,7 +55,7 @@ function Search() {
                         className="w-[760px] h-[50px] mx-auto border mr-3 px-2 py-2"
                         placeholder="Type here what you want to search..."
                         value={search}
-                        onChange={event => setSearch(event.target.value)} />
+                        onChange={searchChangeHandler} />
                     <button type="submit" className="border rounded-md bg-gray-400 text-white px-2 py-2">Search</button>
                 </form>
                 {dropdown && <ul className="absolute top-[50px] left-10 max-h-[200px] overflow-y-scroll">
