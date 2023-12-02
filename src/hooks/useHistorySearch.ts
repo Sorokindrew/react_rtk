@@ -2,15 +2,17 @@ import { useSelector } from 'react-redux';
 import { useContext } from 'react';
 
 import { RootState } from '../store/store';
-import { Dish } from '../models/models';
 import { userContext } from '../context/userContext';
+import { UsersHistoryState } from '../models/models';
+import { getAllHistory } from '../utils/getAllHistory';
 
 export function useHistorySearch() {
     const { user } = useContext(userContext);
 
-    const history = useSelector<RootState, string[]>(
-        state => state.userHistory[user]
-    );
+    const history = useSelector<RootState, UsersHistoryState>(getAllHistory);
 
-    return history === undefined ? [] : history;
+    if (!history[user]) {
+        return [];
+    }
+    return history[user];
 }
