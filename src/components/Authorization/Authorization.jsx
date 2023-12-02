@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { Modal } from '../Modal';
 import { AuthorizationForm } from '../AuthorizationForm/AuthorizationForm';
+import { saveToLS } from '../../utils/localStoreData';
 
 import styles from './Authorization.module.css';
 
@@ -29,6 +30,7 @@ export function Authorization(props) {
 
     const logoutHandler = () => {
         onLogout('');
+        saveToLS('activeUser', JSON.stringify(''));
         nav('/');
     };
 

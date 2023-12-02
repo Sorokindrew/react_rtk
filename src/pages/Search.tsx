@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { useDebounce } from '../hooks/useDebounce';
@@ -8,9 +8,12 @@ import { addToHistory } from '../store/historySlice';
 import { Dish } from '../models/models';
 import { useLoggedUser } from '../hooks/useLoggedUser';
 import { userContext } from '../context/userContext';
+import { DishCard } from '../components/DishCard';
 
 function Search() {
-    const [search, setSearch] = useState('');
+    const [query, setQuery] = useSearchParams();
+    const searchValue = query.get('item') === null ? '' : query.get('item');
+    const [search, setSearch] = useState(searchValue!);
     const [dropdown, setDropdown] = useState(false);
     const debouncedSearch = useDebounce(search);
     const { user } = useContext(userContext);
@@ -21,7 +24,7 @@ function Search() {
     const clickHandler = (item: Dish) => {
         nav(`/dish/${item.id}`);
         if (loggedUser) {
-            dispatch(addToHistory({ user: user, dish: item }));
+            dispatch(addToHistory({ user: user, search: search }));
         }
 
     };
@@ -32,16 +35,29 @@ function Search() {
 
     useEffect(() => {
         setDropdown(debouncedSearch.length >= 3);
+
     }, [debouncedSearch, data]);
+
+    const submitHandler = (e: React.FormEvent) => {
+        e.preventDefault();
+        setQuery({ item: debouncedSearch });
+        if (loggedUser) {
+            dispatch(addToHistory({ user: user, search: search }));
+        }
+        setDropdown(false);
+    };
 
     return (
         <main className="px-5 py-10 text-2xl">
             <div className="mx-auto pl-10 relative">
-                <input type="text"
-                    className="w-[760px] h-[50px] mx-auto border mr-3 px-2 py-2"
-                    placeholder="Type here what you want to search..."
-                    value={search}
-                    onChange={event => setSearch(event.target.value)} />
+                <form onSubmit={submitHandler}>
+                    <input type="text"
+                        className="w-[760px] h-[50px] mx-auto border mr-3 px-2 py-2"
+                        placeholder="Type here what you want to search..."
+                        value={search}
+                        onChange={event => setSearch(event.target.value)} />
+                    <button type="submit" className="border rounded-md bg-gray-400 text-white px-2 py-2">Search</button>
+                </form>
                 {dropdown && <ul className="absolute top-[50px] left-10 max-h-[200px] overflow-y-scroll">
                     {isLoading && (
                         <div className="w-[760px]">Loading...</div>
@@ -57,6 +73,21 @@ function Search() {
                         <div className="w-[760px]">No dish found</div>
                     )}
                 </ul>}
+                {query.get('item') && !dropdown && (
+                    <div className="grid grid-cols-3 gap-10 px-5 py-10">
+
+                        {data?.map(item => {
+                            return (
+                                <DishCard key={item.id}
+                                    id={item.id}
+                                    name={item.name}
+                                    description={item.description}
+                                    thumbnail_url={item.thumbnail_url} />
+                            );
+                        })}
+
+                    </div>
+                )}
             </div>
         </main>
     );

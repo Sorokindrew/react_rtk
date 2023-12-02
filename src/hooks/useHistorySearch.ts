@@ -8,7 +8,7 @@ import { userContext } from '../context/userContext';
 export function useHistorySearch() {
     const { user } = useContext(userContext);
 
-    const history = useSelector<RootState, Dish[]>(
+    const history = useSelector<RootState, string[]>(
         state => state.userHistory[user]
     );
 

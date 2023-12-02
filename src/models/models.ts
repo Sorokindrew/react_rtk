@@ -10,6 +10,7 @@ export interface Instruction {
 }
 
 export interface DishDetailed {
+    id: number;
     name: string;
     thumbnail_url: string;
     description: string;
@@ -26,7 +27,7 @@ export interface FormProps {
 }
 
 export interface UsersState {
-    users: { [key: string]: string };
+    [key: string]: string;
 }
 
 export interface FormikData {
@@ -56,12 +57,12 @@ export interface Favourite {
 }
 
 export interface UserHistoryState {
-    [key: string]: Dish[];
+    [key: string]: string[];
 }
 
 export interface SearchHistoryPayload {
     user: string;
-    dish: Dish;
+    search: string;
 }
 
 export interface Log {
