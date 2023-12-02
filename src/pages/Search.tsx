@@ -34,9 +34,9 @@ function Search() {
     });
 
     useEffect(() => {
-        setDropdown(debouncedSearch.length >= 3);
+        setDropdown(debouncedSearch.length >= 3 && searchValue === '');
 
-    }, [debouncedSearch, data]);
+    }, [debouncedSearch, data, searchValue]);
 
     const submitHandler = (e: React.FormEvent) => {
         e.preventDefault();
@@ -73,9 +73,12 @@ function Search() {
                         <div className="w-[760px]">No dish found</div>
                     )}
                 </ul>}
-                {query.get('item') && !dropdown && (
+                {/* query.get('item') && !dropdown */}
+                {searchValue !== '' && (
                     <div className="grid grid-cols-3 gap-10 px-5 py-10">
-
+                        {isLoading && (
+                            <div className="text-center">Loading...</div>
+                        )}
                         {data?.map(item => {
                             return (
                                 <DishCard key={item.id}

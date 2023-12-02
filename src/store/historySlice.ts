@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { SearchHistoryPayload, UserHistoryState } from '../models/models';
-import { getFromLS, saveToLS } from '../utils/localStoreData';
+import { getFromLS } from '../utils/localStoreData';
 
 const initialState: UserHistoryState = getFromLS('history');
 
@@ -14,7 +14,6 @@ const userHistorySlice = createSlice({
                 state[action.payload.user] = [];
             }
             state[action.payload.user].push(action.payload.search);
-            saveToLS('history', JSON.stringify(state));
         },
     },
 });

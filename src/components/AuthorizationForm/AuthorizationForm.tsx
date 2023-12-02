@@ -9,13 +9,14 @@ import { RootState } from '../../store/store';
 import { userContext } from '../../context/userContext';
 import { loginValidator, passwordValidator } from '../../utils/formikValidators';
 import { loginUser } from '../../utils/loginUser';
+import { getUsers } from '../../utils/getUsers';
 
 import styles from './AuthorizationForm.module.css';
 
 export function AuthorizationForm({ isRegistered, closeModal }: FormProps) {
 
     const dispatch = useDispatch();
-    const users = useSelector<RootState, UsersState>(state => state.users);
+    const users = useSelector<RootState, UsersState>(getUsers);
     const { onChange } = useContext(userContext);
     const baseCssCross = 'h-10 w-1 bg-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2';
 
