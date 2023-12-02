@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -20,6 +20,7 @@ function Search() {
     const nav = useNavigate();
     const dispatch = useDispatch();
     const [loggedUser] = useLoggedUser();
+
 
     const clickHandler = (item: Dish) => {
         nav(`/dish/${item.id}`);
@@ -55,7 +56,9 @@ function Search() {
                         className="w-[760px] h-[50px] mx-auto border mr-3 px-2 py-2"
                         placeholder="Type here what you want to search..."
                         value={search}
-                        onChange={searchChangeHandler} />
+                        onChange={searchChangeHandler}
+                        onBlur={() => setDropdown(false)}
+                    />
                     <button type="submit" className="border rounded-md bg-gray-400 text-white px-2 py-2">Search</button>
                 </form>
                 {dropdown && <ul className="absolute top-[50px] left-10 max-h-[200px] overflow-y-scroll">
@@ -73,8 +76,7 @@ function Search() {
                         <div className="w-[760px]">No dish found</div>
                     )}
                 </ul>}
-                {/* query.get('item') && !dropdown */}
-                {searchValue !== '' && (
+                {searchValue !== '' && !dropdown && (
                     <div className="grid grid-cols-3 gap-10 px-5 py-10">
                         {isLoading && (
                             <div className="text-center">Loading...</div>
