@@ -39,6 +39,10 @@ function Search() {
         setDropdown(true);
     };
 
+    const focusHandler = () => {
+        setDropdown(true);
+    }
+
     const submitHandler = (e: React.FormEvent) => {
         e.preventDefault();
         setQuery({ item: debouncedSearch });
@@ -57,6 +61,7 @@ function Search() {
                         placeholder="Type here what you want to search..."
                         value={search}
                         onChange={searchChangeHandler}
+                        onFocus={focusHandler}
                         onBlur={() => setDropdown(false)}
                     />
                     <button type="submit" className="border rounded-md bg-gray-400 text-white px-2 py-2">Search</button>
